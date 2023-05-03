@@ -1,6 +1,8 @@
 import express from 'express'
+import path from 'path'
 const app = express()
 const port = 3000
+const __dirname = path.resolve();
 
 function time() {
     var date = new Date()
@@ -33,6 +35,36 @@ app.get('/zli', (request, response) => {
 app.get('/name', (request, response) => {
     response.send(name)
     })
+
+app.get('/html', (request, response) => { 
+    response.sendFile(__dirname + '/html.html')
+    })
+
+app.get('/image', (request, response) => {
+    response.sendFile(__dirname + '/bild1.png')
+    })
+
+app.get('/teapot', (request, response) => {
+    response.status(418).send('I am a teapot')
+    })
+
+app.get('/user-agent', (request, response) => {
+    response.send(request.headers['user-agent'])
+    })
+
+app.get('/secret', (request, response) => {
+    response.status(403).send('Access denied')
+    })
+
+app.get('/xml', (request, response) => {
+    response.sendFile(__dirname + '/xxx.xml')
+})
+
+app.get('/me', (request, response) => {
+    response.sendFile(__dirname + '/me.json')
+    })
+
+
 
 
 app.listen(port, () => {
